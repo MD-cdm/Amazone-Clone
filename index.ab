@@ -1,0 +1,44 @@
+// Java program to execute a query using PreparedStatement
+
+import java.sql.*;
+
+public class GFG {
+
+	// Driver Code
+	public static void main(String[] args) throws Exception
+	{
+
+		// Register Driver Class
+		Class.forName("org.apache.derby.jdbc.ClientDriver");
+
+		// Connection to your database
+		Connection con = DriverManager.getConnection();
+
+		// Query which needs parameters
+		String query
+			= "Select * from students where age> ? and name = ?";
+
+		// Prepare Statement
+		PreparedStatement myStmt
+			= con.prepareStatement(query);
+
+		// Set Parameters
+		myStmt.setInt(1, 20);
+		myStmt.setString(2, 'Prateek');
+
+		// Execute SQL query
+		ResultSet myRs = myStmt.executeQuery();
+
+		System.out.println('Age	 Name');
+
+		// Display function to show the Resultset
+		while (myRs.next()) {
+			String Name = rs.getString("name");
+			int age = rs.getInt("age");
+			System.out.println(Name + "	 " + age);
+		}
+
+		// Close the connection
+		con.close();
+	}
+}
